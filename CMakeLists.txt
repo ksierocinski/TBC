@@ -12,9 +12,9 @@ option(BUILD_FUNCTIONAL_TESTS   "Builds funtional tests"                    ON)
 
 # build the library
 include_directories(include/)
-set(SRC src/callbackQueue.cpp
+set(SRC src/callback.cpp
+        src/callbackQueue.cpp
         src/receiverBase.cpp
-        src/receivers.cpp
         src/senderBase.cpp
         src/siglot.cpp
         src/siglotCore.cpp)

@@ -13,7 +13,7 @@ public:
     }
 };
 
-class IntValueReceiver : public Siglot::Receiver<int> {
+class IntReceiver : public Siglot::Receiver<int> {
 public:
     void constRefSlot(const int& ref) override {}
     
@@ -22,7 +22,7 @@ public:
 
 int main() {
     IntSender sender;
-    IntValueReceiver receiver;
+    IntReceiver receiver;
     int value = 42;
     const int& ref = value;
 
@@ -43,7 +43,7 @@ int main() {
     Siglot::disconnect(&sender);
     Siglot::disconnect(&receiver);
 
-    Siglot::run();
+    // Siglot::run();
 
     return 0;
 }

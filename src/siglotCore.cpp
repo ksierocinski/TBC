@@ -1,11 +1,23 @@
-#include <memory>
-
 #include "siglot/private/callback.h"
-#include "siglot/private/receivers.h"
+#include "siglot/private/constRefCallback.h"
+#include "siglot/private/valueCallback.h"
+#include "siglot/receiver.h"
 
 #include "siglot/private/siglotCore.h"
 
 namespace Siglot {
+
+namespace {
+    template <class T>
+    std::unique_ptr<Callback> createConstRefCallback(const T& data, Receiver<T>* receiver) {
+        return new ConstRefCallback<T>{data, receiver};
+    }
+
+    template <class T>
+    std::unique_ptr<Callback> createValueCallback(T&& data, Receiver<T>* receiver) {
+        return new ValueCallback<T>{std::move(data), receiver};
+    }
+}
 
 SiglotCore* SiglotCore::get() {
     static std::unique_ptr<SiglotCore> siglotCore;
@@ -15,28 +27,20 @@ SiglotCore* SiglotCore::get() {
     return siglotCore.get();
 }
 
-void SiglotCore::run()
-{
-    _callbackQueue.callbackLoop();
+void SiglotCore::run() {
+    _callbackQueue.run();
 }
 
-void SiglotCore::addCallback(std::unique_ptr<Callback> callback) {
-    _callbackQueue.addCallback(std::move(callback));
+void SiglotCore::quitThread(std::thread::id threadId, bool force) {
+    _callbackQueue.quitThread(threadId, force);
 }
 
 void SiglotCore::addConnection(std::uintptr_t sender, ReceiverBase* receiver) {
-    auto it = _connections.find(sender);
-    if (it == _connections.end()) {
-        _connections[sender] = std::unique_ptr<Receivers>{new Receivers};
-    }
-    _connections[sender]->addReceiver(receiver);
+    _connections[sender].push_back(receiver);
 }
 
 void SiglotCore::removeConnection(std::uintptr_t sender, ReceiverBase* receiver) {
-    auto it = _connections.find(sender);
-    if (it != _connections.end()) {
-        _connections[sender]->removeReceiver(receiver);
-    }
+    _connections[sender].remove(receiver);
 }
 
 void SiglotCore::removeConnection(std::uintptr_t sender) {
@@ -44,11 +48,9 @@ void SiglotCore::removeConnection(std::uintptr_t sender) {
 }
 
 void SiglotCore::removeConnection(ReceiverBase* receiver) {
-    for (auto&& receivers : _connections) {
-        receivers.second->removeReceiver(receiver);
+    for (auto&& receiverList : _connections) {
+        receiverList.second.remove(receiver);
     }
 }
-
-SiglotCore::~SiglotCore() = default;
 
 } // namespace Siglot

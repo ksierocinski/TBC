@@ -1,38 +1,45 @@
 #ifndef _SIGLOT_CONST_REF_CALLBACK_H
 #define _SIGLOT_CONST_REF_CALLBACK_H
 
-#include <list>
-
+#include "callback.h"
 #include "../receiver.h"
 
 namespace Siglot {
 
+/** Callback with const refence as a parameter */
 template <class T>
-class ConstRefCallback {
+class ConstRefCallback : public Callback {
+    /** Data of the callback given to the slot*/
     const T& _data;
-    std::list<Receiver<T>*> _receivers;
+
+    /** Receiver on which slot will be called */
+    Receiver<T>* _receiver;
 
 public:
-    ConstRefCallback(const T& data, std::list<Receiver<T>*>&& receivers) :
+    /** Constructor
+     * 
+     * \param data data to pass to the slots
+     * \param receiver receiver of the callback
+    */
+    ConstRefCallback(const T& data, Receiver<T>* receiver) :
         _data{data},
-        _receivers{std::move(receivers)}
+        _receiver{receiver}
     {}
 
-    void removeReceiver(ReceiverBase* receiver) override {
-        _receivers.remove(receiver);
+    /** Trigger callback */
+    void trigger() override {
+        _receiver->constRefSlot(_data);
     }
 
-    void trigger() override {
-        if (!_receivers.empty()) {
-            // give a hit to compliler that size won't change
-            const size_t numberOfReceivers = _receivers.size();
-            for (size_t i = 0; i < numberOfReceivers; ++i) {
-                _receivers[i]->constRefSlot(_data);
-            }
-        }
+    /** Getter for receiver pointer
+     * 
+     * \return receiver pointer
+    */
+    ReceiverBase* receiver() override {
+        return _receiver;
     }
 };
 
 } // namespace Siglot
 
-#endif
+#endif // _SIGLOT_CONST_REF_CALLBACK_H
