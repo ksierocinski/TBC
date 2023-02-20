@@ -49,6 +49,12 @@ public:
     /** Starts callback loop */
     void run();
 
+    /** Process next callback
+     * 
+     * \return true if callback was prcessed, false if queue was empty
+    */
+    bool processNextCallback();
+
     /** Request specified thread to quit
      * 
      * \param threadId thread id to quit

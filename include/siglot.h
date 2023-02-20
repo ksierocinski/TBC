@@ -12,6 +12,12 @@ class SenderBase;
 /** Start the loop of receiveing and sending signals */
 void run();
 
+/** Process next signal
+ * 
+ * \return true if signal was prcessed, false if queue was empty
+ */
+bool processNextSignal();
+
 /** Connect one sender to the one receiver
  * 
  *  Each time sender emit signal, the receiver's slot will be called

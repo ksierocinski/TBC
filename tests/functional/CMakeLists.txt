@@ -3,9 +3,14 @@ project(siglot-functional-tests LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 find_package(siglot REQUIRED)
-
-add_executable(01_API 01_api.cpp)
-target_link_libraries(01_API siglot)
-
 enable_testing()
-add_test(NAME "01_API" COMMAND 01_API)
+
+set(TEST_NAMES_LIST
+        01_api
+        02_value_signal)
+
+foreach(test_name ${TEST_NAMES_LIST})
+    add_executable(${test_name} ${test_name}.cpp)
+    target_link_libraries(${test_name} siglot)
+    add_test(NAME ${test_name} COMMAND ${test_name})
+endforeach()

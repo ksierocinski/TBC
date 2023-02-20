@@ -8,7 +8,11 @@
 namespace Siglot {
 
 std::thread::id ReceiverBase::threadId() const {
-    return _thread.get_id();
+    if (_thread.get_id() != std::thread::id()) {
+        return _thread.get_id();
+    } else {
+        return std::this_thread::get_id();
+    }
 }
 
 void ReceiverBase::runInNewThread() {

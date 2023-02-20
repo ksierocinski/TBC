@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(siglot LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_BUILD_TYPE Debug)
 
 # project options
 option(BUILD_SHARED_LIBS        "Build shared library instead of static"    ON)

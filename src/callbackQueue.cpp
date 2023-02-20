@@ -5,6 +5,7 @@
 namespace Siglot {
 
 void CallbackQueue::addCallback(std::unique_ptr<Callback> callback) {
+    auto threadId = callback->threadId();
     ThreadInfo& threadInfo = _threads[callback->threadId()];
     
     // lock it before adding new element
@@ -13,6 +14,23 @@ void CallbackQueue::addCallback(std::unique_ptr<Callback> callback) {
     if (threadInfo.callbackQueue.size() == 1) {
         // queue was empty -> notify thread that it has job to do
         threadInfo.callbackQueueCV.notify_one();
+    }
+}
+
+bool CallbackQueue::processNextCallback()
+{
+    // add this thread to the map of threads
+    auto threadId = std::this_thread::get_id();
+    ThreadInfo& thisThead = _threads[std::this_thread::get_id()];
+
+    std::unique_lock<std::mutex> infoLock(thisThead.infoMutex);
+    if (thisThead.callbackQueue.empty()) {
+        return false;
+    } else {
+        // trigger the callback and remove it from queue
+        thisThead.callbackQueue.front()->trigger();
+        thisThead.callbackQueue.pop_front();
+        return true;
     }
 }
 

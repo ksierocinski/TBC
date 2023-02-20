@@ -31,6 +31,10 @@ void SiglotCore::run() {
     _callbackQueue.run();
 }
 
+bool SiglotCore::processNextSignal() {
+    return _callbackQueue.processNextCallback();
+}
+
 void SiglotCore::quitThread(std::thread::id threadId, bool force) {
     _callbackQueue.quitThread(threadId, force);
 }

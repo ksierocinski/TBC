@@ -8,6 +8,10 @@ void run() {
     SiglotCore::get()->run();
 }
 
+bool processNextSignal() {
+    return SiglotCore::get()->processNextSignal();
+}
+
 void connect(SenderBase* sender, ReceiverBase* receiver) {
     SiglotCore::get()->addConnection(reinterpret_cast<std::uintptr_t>(sender), receiver);
 }

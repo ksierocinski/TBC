@@ -50,6 +50,12 @@ public:
     /** Start the signal slot endless loop */
     void run();
 
+    /** Process next signal
+     * 
+     * \return true if signal was prcessed, false if queue was empty
+    */
+    bool processNextSignal();
+
     /** Request specified thread to quit
      * 
      * \param threadId thread id to quit
@@ -105,6 +111,10 @@ public:
     template <class T>
     void addValueCallback(std::uintptr_t sender, T data) {
         std::list<ReceiverBase*>& receivers = _connections[sender];
+        if (receivers.empty()) {
+            return;
+        }
+        
         auto receiversIterator = receivers.begin();
         const size_t lastReceiverIndex = receivers.size() - 1;
         for (size_t i = 0; i < lastReceiverIndex; ++i) {
