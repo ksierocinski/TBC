@@ -1,6 +1,7 @@
 #ifndef _SIGLOT_RECEIVER_BASE_H
 #define _SIGLOT_RECEIVER_BASE_H
 
+#include <mutex>
 #include <thread>
 
 namespace Siglot {
@@ -27,8 +28,8 @@ public:
      * 
      * Thread will exit when finish all queued callbacks.
      * 
-     * \param wait true if current thread should wait for other to exit, false otherwise
-     * \param force true if quited thread should run all callbacks in queue, false otherwise
+     * \param wait true if current thread should wait for receiver's thread to exit, false otherwise
+     * \param force false if receiver's thread should run all callbacks in queue, true otherwise
     */
     void quitThread(bool wait = false, bool force = false);
 

@@ -43,7 +43,5 @@ int main() {
     Siglot::disconnect(&sender);
     Siglot::disconnect(&receiver);
 
-    // Siglot::run();
-
     return 0;
 }

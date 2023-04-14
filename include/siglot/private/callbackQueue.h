@@ -38,6 +38,28 @@ class CallbackQueue {
     /** Map thread to its ThreadInfo */
     std::unordered_map<std::thread::id, ThreadInfo> _threads;
 
+    std::mutex _threadsMapMutex;
+
+    /** Trigger next callback in the queue
+     * 
+     * The infoLock will remain in the lock state
+     * 
+     * \param threadInfo threadInfo from which call the callback
+     * \param infoLock locked unique_lock of theadInfo
+    */
+    void triggerNextCallback(ThreadInfo& threadInfo, std::unique_lock<std::mutex>& infoLock);
+
+    /** Removes current thread from the thread map */
+    void prepareToThreadExit();
+
+    /** Returns thread info structure
+     * 
+     * \param threadId thread ID of which get the threadInfo
+     * 
+     * \return ThreadInfo object of given thread
+    */
+    ThreadInfo& getThreadInfo(std::thread::id threadId);
+
 public:
     
     /** Add callback to the thread queue 

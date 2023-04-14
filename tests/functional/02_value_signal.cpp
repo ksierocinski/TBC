@@ -20,7 +20,7 @@ public:
         _value = value;
     }
 
-    int value() {
+    int value() const {
         return _value;
     }
 };
