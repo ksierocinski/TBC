@@ -1,19 +1,19 @@
 #include <iostream>
 
-#include <siglot.h>
-#include <siglot/sender.h>
-#include <siglot/receiver.h>
+#include <tbc.h>
+#include <tbc/sender.h>
+#include <tbc/receiver.h>
 
 constexpr int expected_value = 42;
 
-class IntSender : public Siglot::Sender<int> {
+class IntSender : public TBC::Sender<int> {
 public:
     void sendValue() {
         valueSignal(expected_value);
     }
 };
 
-class IntReceiver : public Siglot::Receiver<int> {
+class IntReceiver : public TBC::Receiver<int> {
     int _value;
 public:
     void valueSlot(int value) override {
@@ -30,13 +30,13 @@ int main() {
     IntReceiver receiver;
 
     // connect and signal
-    Siglot::connect(&sender, &receiver);
+    TBC::connect(&sender, &receiver);
     sender.sendValue();
     
     // process the signal
-    bool wasProcessed = Siglot::processNextSignal();
+    bool wasProcessed = TBC::processNextSignal();
     if (!wasProcessed) {
-        std::cout << "Siglot::processNextSignal() returned: false, expected: true" << std::endl;
+        std::cout << "TBC::processNextSignal() returned: false, expected: true" << std::endl;
         return 1;
     }
     
@@ -47,18 +47,18 @@ int main() {
     }
 
     // check if only one signal was emmited
-    wasProcessed = Siglot::processNextSignal();
+    wasProcessed = TBC::processNextSignal();
     if (wasProcessed) {
-        std::cout << "Siglot::processNextSignal() returned: true, expected: false" << std::endl;
+        std::cout << "TBC::processNextSignal() returned: true, expected: false" << std::endl;
         return 1;
     }
 
     // check if disconnected signal won't trigger the slot
-    Siglot::disconnect(&sender, &receiver);
+    TBC::disconnect(&sender, &receiver);
     sender.sendValue();
-    wasProcessed = Siglot::processNextSignal();
+    wasProcessed = TBC::processNextSignal();
     if (wasProcessed) {
-        std::cout << "Siglot::processNextSignal() returned: true, expected: false" << std::endl;
+        std::cout << "TBC::processNextSignal() returned: true, expected: false" << std::endl;
         return 1;
     }
 

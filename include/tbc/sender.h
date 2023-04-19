@@ -1,12 +1,12 @@
-#ifndef _SIGLOT_SENDER_H
-#define _SIGLOT_SENDER_H
+#ifndef _TBC_SENDER_H
+#define _TBC_SENDER_H
 
 #include <utility>
 
-#include "siglot/private/senderBase.h"
-#include "siglot.h"
+#include "tbc/private/senderBase.h"
+#include "tbc.h"
 
-namespace Siglot {
+namespace TBC {
 
 /** This is the class the user object inherits from to allow
  *  connect to receivers and emit signals with T data.
@@ -22,7 +22,7 @@ public:
      * \param data const reference data to send with the signal
      */
     void constRefSignal(const T& data) {
-        Siglot::constRefSignal(this, data);
+        TBC::constRefSignal(this, data);
     }
     
     /** Perform a signal with data
@@ -33,10 +33,10 @@ public:
      * \param data data to send with the signal
      */
     void valueSignal(T data) {
-        Siglot::valueSignal(this, std::move(data));
+        TBC::valueSignal(this, std::move(data));
     }
 };
 
-} // namespace Siglot
+} // namespace TBC
 
-#endif // _SIGLOT_SENDER_H
+#endif // _TBC_SENDER_H

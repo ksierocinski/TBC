@@ -1,25 +1,25 @@
-#include "siglot.h"
+#include "tbc.h"
 
-#include "siglot/private/senderBase.h"
-#include "siglot/private/receiverBase.h"
+#include "tbc/private/senderBase.h"
+#include "tbc/private/receiverBase.h"
 
 
-namespace Siglot {
+namespace TBC {
 
 void SenderBase::connectTo(ReceiverBase* receiver) {
-    Siglot::connect(this, receiver);
+    TBC::connect(this, receiver);
 }
 
 void SenderBase::disconnectFromAll() {
-    Siglot::disconnect(this);
+    TBC::disconnect(this);
 }
 
 void SenderBase::disconnectFrom(ReceiverBase* receiver) {
-    Siglot::disconnect(this, receiver);
+    TBC::disconnect(this, receiver);
 }
 
 SenderBase::~SenderBase() {
     disconnectFromAll();
 }
 
-} // namespace Siglot
+} // namespace TBC

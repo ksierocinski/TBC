@@ -1,8 +1,8 @@
-#include <siglot.h>
-#include <siglot/sender.h>
-#include <siglot/receiver.h>
+#include <tbc.h>
+#include <tbc/sender.h>
+#include <tbc/receiver.h>
 
-class IntSender : public Siglot::Sender<int> {
+class IntSender : public TBC::Sender<int> {
 public:
     void sendValue(int value) {
         valueSignal(value);
@@ -13,7 +13,7 @@ public:
     }
 };
 
-class IntReceiver : public Siglot::Receiver<int> {
+class IntReceiver : public TBC::Receiver<int> {
 public:
     void constRefSlot(const int& ref) override {}
     
@@ -38,10 +38,10 @@ int main() {
     receiver.disconnectFrom(&sender);
     receiver.disconnectFromAll();
 
-    Siglot::connect(&sender, &receiver);
-    Siglot::disconnect(&sender, &receiver);
-    Siglot::disconnect(&sender);
-    Siglot::disconnect(&receiver);
+    TBC::connect(&sender, &receiver);
+    TBC::disconnect(&sender, &receiver);
+    TBC::disconnect(&sender);
+    TBC::disconnect(&receiver);
 
     return 0;
 }

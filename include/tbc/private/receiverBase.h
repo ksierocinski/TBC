@@ -1,10 +1,10 @@
-#ifndef _SIGLOT_RECEIVER_BASE_H
-#define _SIGLOT_RECEIVER_BASE_H
+#ifndef _TBC_RECEIVER_BASE_H
+#define _TBC_RECEIVER_BASE_H
 
 #include <mutex>
 #include <thread>
 
-namespace Siglot {
+namespace TBC {
 
 /** Forward declarations */
 class SenderBase;
@@ -52,6 +52,6 @@ public:
     virtual ~ReceiverBase();
 };
 
-} // namespace Siglot
+} // namespace TBC
 
-#endif // _SIGLOT_RECEIVER_BASE_H
+#endif // _TBC_RECEIVER_BASE_H

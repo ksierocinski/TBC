@@ -1,9 +1,9 @@
-#ifndef _SIGLOT_CALLBACK_H
-#define _SIGLOT_CALLBACK_H
+#ifndef _TBC_CALLBACK_H
+#define _TBC_CALLBACK_H
 
 #include <thread>
 
-namespace Siglot {
+namespace TBC {
 
 class ReceiverBase;
 
@@ -27,6 +27,6 @@ public:
     std::thread::id threadId();
 };
 
-} // namespace Siglot
+} // namespace TBC
 
-#endif // _SIGLOT_CALLBACK_H
+#endif // _TBC_CALLBACK_H

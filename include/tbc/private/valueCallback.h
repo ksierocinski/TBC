@@ -1,16 +1,16 @@
-#ifndef _SIGLOT_CONST_REF_CALLBACK_H
-#define _SIGLOT_CONST_REF_CALLBACK_H
+#ifndef _TBC_VALUE_CALLBACK_H
+#define _TBC_VALUE_CALLBACK_H
 
 #include "callback.h"
 #include "../receiver.h"
 
-namespace Siglot {
+namespace TBC {
 
-/** Callback with const refence as a parameter */
+/** Callback with value as a parameter */
 template <class T>
-class ConstRefCallback : public Callback {
+class ValueCallback : public Callback {
     /** Data of the callback given to the slot*/
-    const T& _data;
+    T _data;
 
     /** Receiver on which slot will be called */
     Receiver<T>* _receiver;
@@ -21,14 +21,14 @@ public:
      * \param data data to pass to the slots
      * \param receiver receiver of the callback
     */
-    ConstRefCallback(const T& data, Receiver<T>* receiver) :
-        _data{data},
+    ValueCallback(T data, Receiver<T>* receiver) :
+        _data{std::move(data)},
         _receiver{receiver}
     {}
 
-    /** Trigger callback */
+    /** Trigger callback  */
     void trigger() override {
-        _receiver->constRefSlot(_data);
+        _receiver->valueSlot(std::move(_data));
     }
 
     /** Getter for receiver pointer
@@ -40,6 +40,6 @@ public:
     }
 };
 
-} // namespace Siglot
+} // namespace TBC
 
-#endif // _SIGLOT_CONST_REF_CALLBACK_H
+#endif // _TBC_VALUE_CALLBACK_H

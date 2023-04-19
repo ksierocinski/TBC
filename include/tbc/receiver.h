@@ -1,9 +1,9 @@
-#ifndef _SIGLOT_RECEIVER_H
-#define _SIGLOT_RECEIVER_H
+#ifndef _TBC_RECEIVER_H
+#define _TBC_RECEIVER_H
 
 #include "private/receiverBase.h"
 
-namespace Siglot {
+namespace TBC {
 
 /** This is the class the user object inherits from to allow
  *  connect to senders and receive signals with T data.
@@ -33,6 +33,6 @@ public:
     }
 };
 
-} // namespace Siglot
+} // namespace TBC
 
-#endif // _SIGLOT_RECEIVER_H
+#endif // _TBC_RECEIVER_H

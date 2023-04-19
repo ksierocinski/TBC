@@ -2,20 +2,20 @@
 #include <thread>
 #include <vector>
 
-#include <siglot.h>
-#include <siglot/sender.h>
-#include <siglot/receiver.h>
+#include <tbc.h>
+#include <tbc/sender.h>
+#include <tbc/receiver.h>
 
 std::mutex receiverMutex;
 
-class IntSender : public Siglot::Sender<std::thread::id> {
+class IntSender : public TBC::Sender<std::thread::id> {
 public:
     void sendValue(std::thread::id threadId) {
         valueSignal(threadId);
     }
 };
 
-class IntReceiver : public Siglot::Receiver<std::thread::id> {
+class IntReceiver : public TBC::Receiver<std::thread::id> {
     int _numberOfProcessedSignal = 0;
     bool _receivedCorrectThreadId = false;
     std::condition_variable _processedSignalCV;
@@ -56,7 +56,7 @@ int main() {
 
     receiver.connectTo(&sender);
     sender.sendValue(std::this_thread::get_id());
-    Siglot::processNextSignal();
+    TBC::processNextSignal();
     if (!receiver.receivedCorrectThreadId()) {
         std::cout << "Receiver runs in wrong thread on first signal" << std::endl;
         return 1;
@@ -84,7 +84,7 @@ int main() {
 
 
     sender.sendValue(std::this_thread::get_id());
-    Siglot::processNextSignal();
+    TBC::processNextSignal();
     if (!receiver.receivedCorrectThreadId()) {
         std::cout << "Receiver runs in wrong thread on third signal" << std::endl;
         return 1;

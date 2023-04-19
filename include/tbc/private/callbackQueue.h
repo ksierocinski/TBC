@@ -1,5 +1,5 @@
-#ifndef _SIGLOT_CALLBACK_QUEUE_H
-#define _SIGLOT_CALLBACK_QUEUE_H
+#ifndef _TBC_CALLBACK_QUEUE_H
+#define _TBC_CALLBACK_QUEUE_H
 
 #include <condition_variable>
 #include <deque>
@@ -9,7 +9,7 @@
 
 #include "callback.h"
 
-namespace Siglot {
+namespace TBC {
 
 /** Class responsible for queuing callbacks and calling them one by one */
 class CallbackQueue {
@@ -85,6 +85,6 @@ public:
     void quitThread(std::thread::id threadId, bool force = false);
 };
 
-} // namespace Siglot
+} // namespace TBC
 
-#endif // _SIGLOT_CALLBACK_QUEUE_H
+#endif // _TBC_CALLBACK_QUEUE_H

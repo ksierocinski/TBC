@@ -1,19 +1,19 @@
 #include <iostream>
 
-#include <siglot.h>
-#include <siglot/sender.h>
-#include <siglot/receiver.h>
+#include <tbc.h>
+#include <tbc/sender.h>
+#include <tbc/receiver.h>
 
 constexpr int random_value = 42;
 
-class IntSender : public Siglot::Sender<int> {
+class IntSender : public TBC::Sender<int> {
 public:
     void sendValue() {
         valueSignal(random_value);
     }
 };
 
-class IntReceiver : public Siglot::Receiver<int> {
+class IntReceiver : public TBC::Receiver<int> {
 
 public:
     void valueSlot(int) override {}
@@ -26,13 +26,13 @@ int main() {
         IntReceiver receiver;
 
         // connect and signal
-        Siglot::connect(&sender, &receiver);
+        TBC::connect(&sender, &receiver);
     }
 
     sender.sendValue();
-    bool wasProcessed = Siglot::processNextSignal();
+    bool wasProcessed = TBC::processNextSignal();
     if (wasProcessed) {
-        std::cout << "Siglot::processNextSignal() returned: true, expected: false" << std::endl;
+        std::cout << "TBC::processNextSignal() returned: true, expected: false" << std::endl;
         return 1;
     }
 

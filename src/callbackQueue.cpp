@@ -1,8 +1,8 @@
 #include <iostream>
 
-#include "siglot/private/callbackQueue.h"
+#include "tbc/private/callbackQueue.h"
 
-namespace Siglot {
+namespace TBC {
 
 void CallbackQueue::triggerNextCallback(ThreadInfo& threadInfo, std::unique_lock<std::mutex>& infoLock)
 {
@@ -108,4 +108,4 @@ void CallbackQueue::quitThread(std::thread::id threadId, bool force)
     }
 }
 
-} // namespace Siglot
+} // namespace TBC

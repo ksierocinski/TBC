@@ -1,9 +1,9 @@
-#ifndef _SIGLOT_H
-#define _SIGLOT_H
+#ifndef _TBC_H
+#define _TBC_H
 
-#include "siglot/private/siglotCore.h"
+#include "tbc/private/tbcCore.h"
 
-namespace Siglot {
+namespace TBC {
     
 /** Forward declarations*/
 class ReceiverBase;
@@ -55,7 +55,7 @@ void disconnect(ReceiverBase* receiver);
  */
 template <class T>
 void constRefSignal(SenderBase* sender, const T& data) {
-    SiglotCore::get()->addConstRefCallback<T>(reinterpret_cast<std::uintptr_t>(sender), data);
+    TBCCore::get()->addConstRefCallback<T>(reinterpret_cast<std::uintptr_t>(sender), data);
 }
 
 /** Perform a signal from the sender with data
@@ -68,9 +68,9 @@ void constRefSignal(SenderBase* sender, const T& data) {
  */
 template <class T>
 void valueSignal(SenderBase* sender, T data) {
-    SiglotCore::get()->addValueCallback<T>(reinterpret_cast<std::uintptr_t>(sender), std::move(data));
+    TBCCore::get()->addValueCallback<T>(reinterpret_cast<std::uintptr_t>(sender), std::move(data));
 }
 
-} // namespace Siglot
+} // namespace TBC
 
-#endif // _SIGLOT_H
+#endif // _TBC_H

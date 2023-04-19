@@ -1,5 +1,5 @@
-#ifndef _SIGLOT_SIGLOT_CORE_H
-#define _SIGLOT_SIGLOT_CORE_H
+#ifndef _TBC_TBC_CORE_H
+#define _TBC_TBC_CORE_H
 
 #include <cstdint>
 #include <deque>
@@ -12,7 +12,7 @@
 #include "constRefCallback.h"
 #include "valueCallback.h"
 
-namespace Siglot {
+namespace TBC {
 
 /** Forward declarations */
 class Callback;
@@ -21,7 +21,7 @@ class Receivers;
 class SenderBase;
 
 /** Core of the library logix. It handles connections and callbacks */
-class SiglotCore {
+class TBCCore {
     /** Map sender pointer value to its receivers */
     using Connections = std::unordered_map<std::uintptr_t, std::list<ReceiverBase*>>;
 
@@ -32,20 +32,20 @@ class SiglotCore {
     Connections _connections;
 
     /** Constructor */
-    SiglotCore() = default;
+    TBCCore() = default;
 
     /** Copy constructor */
-    SiglotCore(const SiglotCore&) = delete;
+    TBCCore(const TBCCore&) = delete;
 
     /** Move onstructor */
-    SiglotCore(SiglotCore&&) = delete;
+    TBCCore(TBCCore&&) = delete;
 
 public:
-    /** Return SiglotCore instance (singleton pattern)
+    /** Return TBCCore instance (singleton pattern)
      * 
-     * \return pointer to SiglotCore instance
+     * \return pointer to TBCCore instance
      */
-    static SiglotCore* get();
+    static TBCCore* get();
 
     /** Start the signal slot endless loop */
     void run();
@@ -130,6 +130,6 @@ public:
     }
 };
 
-} // namespace Siglot
+} // namespace TBC
 
-#endif // _SIGLOT_SIGLOT_CORE_H
+#endif // _TBC_TBC_CORE_H

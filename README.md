@@ -1,2 +1,2 @@
-# siglot
-A template based signal slot event system cpp library.
+# TBC (Template Based Communication)
+TBC is a template based thread communication C++ library, that provides signal slot event system.

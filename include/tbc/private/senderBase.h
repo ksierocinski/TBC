@@ -1,7 +1,7 @@
-#ifndef _SIGLOT_SENDER_BASE_H
-#define _SIGLOT_SENDER_BASE_H
+#ifndef _TBC_SENDER_BASE_H
+#define _TBC_SENDER_BASE_H
 
-namespace Siglot {
+namespace TBC {
 
 /** Forward declarations */
 class ReceiverBase;
@@ -29,6 +29,6 @@ public:
     virtual ~SenderBase();
 };
 
-} // namespace Siglot
+} // namespace TBC
 
-#endif // _SIGLOT_SENDER_BASE_H
+#endif // _TBC_SENDER_BASE_H

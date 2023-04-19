@@ -1,20 +1,20 @@
 #include <iostream>
 #include <vector>
 
-#include <siglot.h>
-#include <siglot/sender.h>
-#include <siglot/receiver.h>
+#include <tbc.h>
+#include <tbc/sender.h>
+#include <tbc/receiver.h>
 
 constexpr int numberOfSenders = 10;
 
-class IntSender : public Siglot::Sender<int> {
+class IntSender : public TBC::Sender<int> {
 public:
     void sendValue(int value) {
         valueSignal(value);
     }
 };
 
-class IntReceiver : public Siglot::Receiver<int> {
+class IntReceiver : public TBC::Receiver<int> {
     std::vector<int> _values;
 public:
     void valueSlot(int value) override {
@@ -44,7 +44,7 @@ int main() {
     // process all signals
     int processedSignals = 0;
     const int expectedSignals = senders.size();
-    while (Siglot::processNextSignal()) {
+    while (TBC::processNextSignal()) {
         ++processedSignals;
     }
     if (processedSignals != expectedSignals) {

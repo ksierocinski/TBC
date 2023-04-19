@@ -1,11 +1,11 @@
-#include "siglot/private/receiverBase.h"
+#include "tbc/private/receiverBase.h"
 
-#include "siglot/private/callback.h"
+#include "tbc/private/callback.h"
 
-namespace Siglot {
+namespace TBC {
 
 std::thread::id Callback::threadId() {
     return receiver()->threadId();
 }
 
-} // namespace Siglot
+} // namespace TBC
