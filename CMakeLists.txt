@@ -1,8 +1,15 @@
 cmake_minimum_required(VERSION 3.10)
 project(TBC LANGUAGES CXX)
 
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release)
+endif()
+
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wunused-parameter")
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_BUILD_TYPE Debug)
 
 # project options
 option(BUILD_SHARED_LIBS        "Build shared library instead of static"    ON)
@@ -10,6 +17,7 @@ option(BUILD_EXAMPLES           "Builds examples (C++17 required)"          ON)
 option(BUILD_TESTS              "Builds all tests (gtest required)"         ON)
 option(BUILD_UNIT_TESTS         "Builds unit tests (gtest required)"        ON)
 option(BUILD_FUNCTIONAL_TESTS   "Builds funtional tests"                    ON)
+option(BUILD_BENCHMARKS         "Builds benchmarks"                         ON)
 
 # build the library
 include_directories(include/)
@@ -38,6 +46,11 @@ if (${BUILD_TESTS})
     if (${BUILD_FUNCTIONAL_TESTS})
          add_subdirectory("tests/functional")
     endif()
+endif()
+
+# build benchmarks
+if (${BUILD_EXAMPLES})
+     add_subdirectory("benchmarks")
 endif()
 
 # create a version file

@@ -15,9 +15,9 @@ public:
 
 class IntReceiver : public TBC::Receiver<int> {
 public:
-    void constRefSlot(const int& ref) override {}
+    void constRefSlot([[maybe_unused]] const int& ref) override {}
     
-    void valueSlot(int value) override {}
+    void valueSlot([[maybe_unused]] int value) override {}
 };
 
 int main() {

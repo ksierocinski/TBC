@@ -35,8 +35,7 @@ int main() {
         receiver.connectTo(&sender);
     }
     
-    int value = 0;
-    for (int i = 0; i < senders.size(); ++i) {
+    for (size_t i = 0; i < senders.size(); ++i) {
         senders[i].sendValue(i);
     }
     
@@ -53,14 +52,14 @@ int main() {
     }
     
     auto&& returned_values = receiver.values();
-    for (int i = 0; i < senders.size(); ++i) {
-        if (returned_values[i] != i) {
+    for (size_t i = 0; i < senders.size(); ++i) {
+        if (returned_values[i] != static_cast<int>(i)) {
             std::cout << "Returned vector has different values:";
             for (auto&& value : returned_values) {
                 std::cout << " " << value;
             }
             std::cout << " , expected:";
-            for (int i = 0; i < senders.size(); ++i) {
+            for (size_t i = 0; i < senders.size(); ++i) {
                 std::cout << " " << i;
             }
             std::cout << std::endl;

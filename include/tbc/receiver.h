@@ -19,7 +19,7 @@ public:
      * \param data const reference data received with the signal
      */
     virtual void constRefSlot(const T& data) {
-        // do nothing by default
+        valueSlot(data);
     }
     
     /** Called when received a signal with data
@@ -29,7 +29,7 @@ public:
      * \param data data received with the signal
      */
     virtual void valueSlot(T data) {
-        constRefSlot(std::move(data));
+        constRefSlot(data);
     }
 };
 
