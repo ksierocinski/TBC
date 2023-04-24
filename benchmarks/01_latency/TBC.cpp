@@ -4,17 +4,20 @@
 #include "TBCReceiver.h"
 #include "TBCSender.h"
 
+
 using std::chrono::high_resolution_clock;
-constexpr int iterations = 10;
+constexpr int iterations = 50;
 
 int main() {
+
     TBCSender sender;
     TBCReceiver receiver;
+    
+    
     receiver.runInNewThread();
-
-    // connect and signal
     TBC::connect(&sender, &receiver);
 
+    
     std::cout << "TBC latency [µs]: ";
     for (size_t i = 0; i < iterations; ++i) {
         sender.valueSignal(std::chrono::high_resolution_clock::now());
@@ -23,6 +26,7 @@ int main() {
     std::cout << std::flush << std::endl;
     
     receiver.quitThread(true);
+
 
     return 0;
 }

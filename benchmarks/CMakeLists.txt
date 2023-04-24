@@ -16,3 +16,8 @@ add_subdirectory(01_latency)
 add_subdirectory(02_const_to_const)
 add_subdirectory(03_const_to_value)
 add_subdirectory(04_rvalue_to_value)
+add_subdirectory(05_const_to_const_1_to_4)
+add_subdirectory(06_const_to_value_1_to_4)
+add_subdirectory(07_rvalue_to_value_1_to_4)
+
+configure_file(run_all.sh run_all.sh)

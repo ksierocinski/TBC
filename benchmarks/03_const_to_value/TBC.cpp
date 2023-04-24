@@ -4,20 +4,21 @@
 #include "TBCReceiver.h"
 #include "TBCSender.h"
 
-#include "../00_common_files/Msg.h"
 
 using std::chrono::high_resolution_clock;
-constexpr int iterations = 5;
+constexpr int iterations = 50;
 
 int main() {
+
     TBCSender sender;
     TBCReceiver receiver;
+
     receiver.runInNewThread();
 
-    // connect and signal
     TBC::connect(&sender, &receiver);
 
-    for (size_t msgByteSizeInKb = 1; msgByteSizeInKb <= 32768; msgByteSizeInKb*=8)
+
+    for (size_t msgByteSizeInKb = 1; msgByteSizeInKb <= Msg::maxMsgSizeInKb; msgByteSizeInKb*=8)
     {
         std::cout << "TBC const& to value " << msgByteSizeInKb << " kB msg [µs]: ";
         Msg data (msgByteSizeInKb);
@@ -30,6 +31,7 @@ int main() {
     }
     
     receiver.quitThread(true);
+
 
     return 0;
 }

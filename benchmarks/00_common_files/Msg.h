@@ -4,9 +4,18 @@
 #include <chrono>
 #include <vector>
 
+constexpr int power(int base, int exponent) {
+    int result = 1;
+    for (int i = 0; i < exponent; ++i) {
+        result *= base;
+    }
+    return result;
+}
+
 class Msg {
     std::vector<uint8_t> _data;
     std::chrono::high_resolution_clock::time_point _msgCreationTimePoint;
+    
     
 
 public:
@@ -32,6 +41,8 @@ public:
     size_t dataSizeInKb() {
         return _data.size() / 1024;
     }
+
+    static constexpr int maxMsgSizeInKb = power(8, 6);
 }; 
 
 #endif // TBC_BENCH_MSG
