@@ -1,0 +1,6 @@
+add_subdirectory(01_rvalue_to_const)
+add_subdirectory(02_const_to_const)
+add_subdirectory(03_const_to_value)
+add_subdirectory(04_rvalue_to_value)
+
+configure_file(run_all.sh run_all.sh)

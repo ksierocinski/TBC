@@ -12,7 +12,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 find_package(Qt5 REQUIRED COMPONENTS Core)
 
-add_subdirectory(01_latency)
+add_subdirectory(00_latency)
+add_subdirectory(01_rvalue_to_const)
 add_subdirectory(02_const_to_const)
 add_subdirectory(03_const_to_value)
 add_subdirectory(04_rvalue_to_value)

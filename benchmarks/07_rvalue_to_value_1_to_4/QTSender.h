@@ -5,7 +5,7 @@
 #include <thread>
 
 #include <QtCore>
-#include "../00_common_files/Msg.h"
+#include "../common_files/Msg.h"
 
 class QTSender : public QObject {
     Q_OBJECT

@@ -45,6 +45,7 @@ if (${BUILD_TESTS})
 
     if (${BUILD_FUNCTIONAL_TESTS})
          add_subdirectory("tests/functional")
+         add_subdirectory("tests/numberOfCopies")
     endif()
 endif()
 

@@ -2,6 +2,7 @@
 #define TBC_BENCH_QTRECEIVER
 
 #include <iostream>
+#include <thread>
 
 #include <QtCore>
 #include "../common_files/Msg.h"
@@ -17,8 +18,8 @@ public:
 
 public slots:
     void constRefSlot(const Msg& msg) {
-        auto endTimePoint = std::chrono::high_resolution_clock::now();
-        std::cout << std::chrono::duration_cast<std::chrono::microseconds> (endTimePoint - msg.sendTimePoint()).count() << ",";
+        std::cout << "QT const& to const& copies: " << msg.copyCounter() << std::endl;
+        std::this_thread::sleep_for(std::chrono::seconds{1});
     }
 }; 
 

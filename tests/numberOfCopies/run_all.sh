@@ -1,0 +1,8 @@
+./01_rvalue_to_const/01_rvalue_to_const_QT_copies
+./01_rvalue_to_const/01_rvalue_to_const_TBC_copies
+./02_const_to_const/02_const_to_const_QT_copies
+./02_const_to_const/02_const_to_const_TBC_copies
+./03_const_to_value/03_const_to_value_QT_copies
+./03_const_to_value/03_const_to_value_TBC_copies
+./04_rvalue_to_value/04_rvalue_to_value_QT_copies
+./04_rvalue_to_value/04_rvalue_to_value_TBC_copies

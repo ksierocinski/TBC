@@ -5,7 +5,7 @@
 
 #include <QtCore>
 
-#include "../00_common_files/Msg.h"
+#include "../common_files/Msg.h"
 
 class QTReceiver : public QObject {
     Q_OBJECT

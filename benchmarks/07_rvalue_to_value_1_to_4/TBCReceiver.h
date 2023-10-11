@@ -7,7 +7,7 @@
 #include <mutex>
 
 #include <tbc/receiver.h>
-#include "../00_common_files/Msg.h"
+#include "../common_files/Msg.h"
 
 constexpr int numberOfReceivers = 4;
 

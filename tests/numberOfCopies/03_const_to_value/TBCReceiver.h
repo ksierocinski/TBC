@@ -9,8 +9,8 @@
 class TBCReceiver : public TBC::Receiver<Msg> {
 public:
     void valueSlot(Msg msg) override {
-        auto endTimePoint = std::chrono::high_resolution_clock::now();
-        std::cout << std::chrono::duration_cast<std::chrono::microseconds> (endTimePoint - msg.sendTimePoint()).count() << ",";
+        std::cout << "TBC const& to value copies: " << msg.copyCounter() << std::endl;
+        std::this_thread::sleep_for(std::chrono::seconds{1});
     }
 };
 
