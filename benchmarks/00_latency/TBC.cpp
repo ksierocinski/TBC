@@ -23,7 +23,7 @@ int main() {
         sender.valueSignal(std::chrono::high_resolution_clock::now());
         std::this_thread::sleep_for(std::chrono::seconds{1});
     }
-    std::cout << std::flush << std::endl;
+    std::cout << std::endl;
     
     receiver.quitThread(true);
 
